@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalkZone</title>
+    <script src="./js/index.js" defer>  
+    </script>
+    <link rel="stylesheet" href="./styles/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="manifest" href="./manifest.json">
+</head>
+<body>
+
+
+    <div id="app">
+
+         <header>
+              <div class="logo"></div>
+              <div class="title">Messenger</div>
+              <div class="user">
+                   <div class="user-photo"><img width="75" src="./assets/avatars/ava.png" alt=""></div>
+                   <div class="user-name"> <span id="user-name">Serkhan</span> <br> #ID73...2A </div>
+              </div>
+         </header>
+
+         <main>
+
+            <aside class="connected-users">
+               
+                <div class="connected-users-bar">
+                 <div>Online <span id="online-users">0</span>  <div class="pulse-lighthouse"></div> </div>
+                </div>     
+
+                <div id="users-list">
+                    
+                </div>
+
+            </aside>
+
+            <div>
+                 <div class="chat-wrapper">
+                      <div class="chat-header"> Eyecode Community &copy; </div>
+                      <div class="chat-dialog" id="chat">
+
+                         <div class="message">
+                            <div class="message-text"> Hello, my name is Susy :) </div>
+                            <div class="message-time">14:03</div>
+                         </div>
+
+                      </div>
+                      <div class="chat-controlls">
+                        <input 
+                            type="text" 
+                            role="dialog" 
+                            aria-label="Ввод сообщения" 
+                            maxlength="160"
+                            id="msg-inp"
+                        >
+                        <button id="send-message">
+                            <img width="18" src="./assets/controls/arrow-up.svg" alt="">
+                        </button>
+                        <button id="voice-message">
+                            <img width="18" src="./assets/controls/mic.svg" alt="">
+                        </button>
+                        
+                      </div>
+                 </div>
+            </div>
+         
+         </main>
+         
+         <footer></footer>
+    </div>
+
+    <script src="./js/index.js"></script>
+    
+</body>
+</html>
