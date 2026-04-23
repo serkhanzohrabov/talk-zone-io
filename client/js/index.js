@@ -47,7 +47,7 @@ socket.on('chat message',(data)=>{
                 </div>
     `
 
-    chat.textContent += temp;
+    chat.innerHTML += temp;
 })
 
 socket.on('online users',(data)=>{
