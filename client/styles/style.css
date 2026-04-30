@@ -103,6 +103,11 @@ main{
     text-align: center;
     font-size: 0.8rem;
     font-family: 'Poppins';
+
+    &::placeholder{
+        font-family: 'Poppins';
+        font-size: 0.8rem;
+    }
 }
 
 #send-message{
@@ -214,6 +219,31 @@ main{
     font-size: 0.8rem;
      display: flex;
      align-items: center;
+}
+
+.typing-indicator{
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: orangered;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 40px;
+
+}
+
+
+/* Modifs */
+
+.connected-user{
+    color: blue;
+    font-family: monospace;
+}
+
+.disconnected-user{
+    color: rgb(240, 27, 73);
+    font-family: monospace;
 }
 
 @keyframes pulse{

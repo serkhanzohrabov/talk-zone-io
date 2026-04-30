@@ -5,10 +5,14 @@ const msgInp = document.querySelector('#msg-inp');
 const msgBtn = document.querySelector('#send-message');
 const onlineUsersEl = document.querySelector('#online-users');
 const usersListEl = document.querySelector('#users-list')
+const userTypingEl = document.querySelector('#user-typing');
 
 let user_name = prompt('Введите ваше имя');
 userNameEl.textContent = user_name;
 socket.emit('join',user_name); // Как только подключился пользователь сразу отправляем на сервер
+
+let typing = false;
+let typingTimeout;
 
 function sendMessage(){
     let msg =  msgInp.value; // Получили сообщение
@@ -27,6 +31,24 @@ function sendMessage(){
     // Отправили по socket соединению сообщение на сервер
     socket.emit('chat message',data)
     msgInp.value = '';
+}
+
+function ticTyping(){
+   
+   
+
+    if(!typing){
+        typing = true;
+        socket.emit('typing',user_name)
+    }
+
+    clearTimeout(typingTimeout);
+
+    typingTimeout = setTimeout(()=>{
+        typing = false;
+        socket.emit('stop typing',user_name)
+    },1500)
+
 }
 
 
@@ -51,10 +73,15 @@ socket.on('chat message',(data)=>{
 })
 
 socket.on('online users',(data)=>{
-    const {count,users} = data;
+    const {count,users,user_info} = data;
     onlineUsersEl.innerHTML = count;
-   
     console.log(users);
+    
+    if(user_info.status == true){
+        chat.innerHTML += `<p class="connected-user"> Пользователь: ${user_info.name} подключился </p>` 
+    }else{
+        chat.innerHTML += `<p class="disconnected-user"> Пользователь: ${user_info.name} отключился  </p>` 
+    }
 
     usersListEl.innerHTML = '';
 
@@ -68,6 +95,16 @@ socket.on('online users',(data)=>{
 
 })
 
+socket.on('typing',(username)=>{
+    userTypingEl.textContent = `${username} печатает сообщение...`
+})
+
+socket.on('stop typing',(username)=>{
+    userTypingEl.textContent = '';
+})
+
 
  // По нажатию на кнопку отправки отправляем сообщение
  msgBtn.onclick = sendMessage;
+
+ msgInp.addEventListener('input',ticTyping)
